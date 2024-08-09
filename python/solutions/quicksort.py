@@ -1,7 +1,5 @@
 import pygame
-from visualizer import visual as draw_algorithm
-
-# TODO: faire des aides pour les personnes en difficulté
+from visualizer import visual as render
 
 # INFO: Define `Surface` to statically type the variable `window`.
 # This is not important for the exercice
@@ -13,60 +11,42 @@ comparisons = 0
 array_access = 0
 
 
-def swap(bars: list[int], i: int, pivot: int) -> None:
-    """ Swap bars' places
-
-    Swap the position of the pivot and the bar at position `i` if 
-    `bars[i]` < pivot. This organizes the bars from smaller to biggest
-
-    Args:
-        bars (list[int]): random_numbers to sort. Previously nammed 'random_numbers'
-        i (int): Position of the bar that we need to swap with the pivot
-        pivot (int): Position of the pivot bar
-
-    Return:
-        None
-    """
+def swap(bars, i, j):
     global array_access
     array_access += 4
 
     temporary = bars[i]
-    bars[i] = bars[pivot]
-    bars[pivot] = temporary
+    # NOTE: make user write
+    # bars[i] = bars[j]
+    # ?
+    bars[i] = bars[j]
+    bars[j] = temporary
 
 
 def partition(bars: list[int], left: int, right: int, window: Surface) -> int:
-    """ 
+    """
 
-    First, it defines the pivot as the first element of `bars`.
-    Then, for each bar, compare it's height with the pivot's.
-    If the bar at position `i` if smaller than the pivot: it calls swap() to
-    swap the places of the two bars.
-
+    First, it defines the pivot as the last element of `bars`.
+    Then, divide
     Args:
-        bars (list[int]): random_numbers to sort. Previously nammed 'random_numbers'
-        left (int): The bar located at the far LEFT of the `bars` list
-        right (int): The bar located at the far RIGHT of the `bars` list
-        window (Surface): The window in which we'll visualize the algorithm
-
-    Return:
-        pivot (int):
+        bars ():
+        left ():
+        right ():
+        window ():
     """
 
     global comparisons, array_access
     pivot = left
 
-    draw_algorithm.drawrect(pivot, bars, window, "red")
+    render.drawrect(pivot, bars, window, "green")
 
     for i in range(left + 1, right):
         if bars[i] < bars[left]:
-            draw_algorithm.drawrect(i, bars, window, "blue")
-
+            render.drawrect(i, bars, window, "blue")
             pivot += 1
-            swap(bars, i, pivot)
-
+            render.swap(bars, i, pivot)
         else:
-            draw_algorithm.drawrect(i, bars, window, "yellow")
+            render.drawrect(i, bars, window, "red")
 
         array_access += 2
         comparisons += 1
@@ -83,14 +63,14 @@ def quickSort(bars: list[int], left: int, right: int, window: Surface) -> None:
 
     Args:
         bars (list[int]): random_numbers to sort. Previously nammed 'random_numbers'
-        left (int): The bar located at the far LEFT of the `bars` list
-        right (int): The bar located at the far RIGHT of the `bars` list
-        window (Surface): The window in which we'll visualize the algorithm
+        left (int):
+        right (int):
+        window (Surface):
     """
     if left < right:
         pivot = partition(bars, left, right, window)
 
-        draw_algorithm.drawarr(bars, window)
+        render.drawarr(bars, window)
         pygame.time.delay(10)
 
         quickSort(bars, left, pivot, window)
