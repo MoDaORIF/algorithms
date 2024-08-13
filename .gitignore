@@ -1,2 +1,5 @@
-# Ignore the virutal env
+# Ignore the i env
 python/.venv
+
+__pycache__/
+*.pyc

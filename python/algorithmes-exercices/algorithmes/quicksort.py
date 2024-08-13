@@ -14,9 +14,9 @@ array_access = 0
 
 
 def swap(bars: list[int], i: int, pivot: int) -> None:
-    """ Swap bars' places
+    """Swap bars' places
 
-    Swap the position of the pivot and the bar at position `i` if 
+    Swap the position of the pivot and the bar at position `i` if
     `bars[i]` < pivot. This organizes the bars from smaller to biggest
 
     Args:
@@ -36,12 +36,17 @@ def swap(bars: list[int], i: int, pivot: int) -> None:
 
 
 def partition(bars: list[int], left: int, right: int, window: Surface) -> int:
-    """ 
+    """Partitions the `bars` list around a pivot element for the quicksort algorithm.
 
-    First, it defines the pivot as the first element of `bars`.
-    Then, for each bar, compare it's height with the pivot's.
-    If the bar at position `i` if smaller than the pivot: it calls swap() to
-    swap the places of the two bars.
+    This function selects the leftmost element as the pivot and iterates through the
+    `bars` list, comparing each element to the pivot. If an element is smaller than
+    the pivot, it swaps that element with the one at the current pivot index. The
+    process continues until all elements have been compared. Finally, the pivot element
+    is placed in its correct position, and its index is returned.
+
+    This function also includes visualization code to display the algorithm's progress
+    in a graphical window, using the `draw_algorithm.drawrect` function to color the
+    bars and `pygame.time.delay` to control the speed of the visualization.
 
     Args:
         bars (list[int]): random_numbers to sort. Previously nammed 'random_numbers'
@@ -60,14 +65,24 @@ def partition(bars: list[int], left: int, right: int, window: Surface) -> int:
 
     for i in range(left + 1, right):
         if bars[i] < bars[left]:
+            # Animation
             draw_algorithm.drawrect(i, bars, window, "blue")
 
             pivot += 1
             swap(bars, i, pivot)
 
         else:
+            # Animation
             draw_algorithm.drawrect(i, bars, window, "yellow")
 
+        # INFO: Delay to slow down the animation. Increase the value if you need
+        # more time to visualize the animation.
+        # Default value: 0
+        animation_delay = 0  # in ms
+        pygame.time.delay(animation_delay)
+
+        # INFO: Used to display in the window some cool stats
+        # This is not important for the exercice
         array_access += 2
         comparisons += 1
         pygame.time.delay(1)
@@ -90,8 +105,8 @@ def quickSort(bars: list[int], left: int, right: int, window: Surface) -> None:
     if left < right:
         pivot = partition(bars, left, right, window)
 
+        # Animation
         draw_algorithm.drawarr(bars, window)
-        pygame.time.delay(10)
 
         quickSort(bars, left, pivot, window)
         quickSort(bars, pivot + 1, right, window)
@@ -110,9 +125,16 @@ def main(random_numbers: list[int], window: Surface) -> None:
     Return:
         None
     """
+
+    # INFO: Used to display in the window some cool stats
+    # This is not important for the exercice
     global comparisons, array_access
     comparisons = 0
     array_access = 0
 
     quickSort(random_numbers, 0, len(random_numbers), window)
     return
+
+
+def test(random_numbers: list[int], window: Surface):
+    print(x)
