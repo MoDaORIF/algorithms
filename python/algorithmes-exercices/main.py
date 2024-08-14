@@ -9,8 +9,11 @@ screen = py.display.set_mode((width, height))
 py.display.set_caption('Sorting Algorithms Visualizer')
 
 arr = [i+1 for i in range(250)]
+
 def resetArray():
     global arr
+    # NOTE: DEBUG !
+    # Force the bars to be in the right order
     for _ in range(500):
         a, b = randint(0, 249), randint(0, 249)
         aux = arr[a]
@@ -27,9 +30,9 @@ visual.drawarr(arr, screen)
 def keyActions():
     keys = py.key.get_pressed()
     
-    if keys[py.K_q]:
+    if keys[py.K_1]:
         return 0
-    elif keys[py.K_i]:
+    elif keys[py.K_2]:
         return 1
     elif keys[py.K_r]:
         resetArray()

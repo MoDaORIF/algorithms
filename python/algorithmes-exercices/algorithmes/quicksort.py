@@ -134,7 +134,3 @@ def main(random_numbers: list[int], window: Surface) -> None:
 
     quickSort(random_numbers, 0, len(random_numbers), window)
     return
-
-
-def test(random_numbers: list[int], window: Surface):
-    print(x)

@@ -1,5 +1,5 @@
 import pygame as py
-from algorithmes import quicksort
+from algorithmes import quicksort, binary_search
 
 py.font.init()
 my_font = py.font.SysFont('Comic Sans MS', 30)
@@ -22,12 +22,13 @@ def visualize(sort, arr, scr):
         sort_alg = "Quick"
         drawarr(arr, scr)
         quicksort.main(arr, scr)
+        greenPass(arr, scr)
     elif sort == 1:
-        sort_alg = "Bubble"
+        sort_alg = "binary search"
         drawarr(arr, scr)
-        bubbleSort(arr, scr)
+        binary_search.main(arr, scr)
+        input("Press Enter to continue...")
 
-    greenPass(arr, scr)
     return
 
 def printStats(scr):
@@ -49,81 +50,4 @@ def drawarr(array, screen):
         h = array[i]
         py.draw.rect(screen, (50+h*0.35, 255-h*0.8, 100+h*0.3), py.Rect(15+i*5, 780-h*3, 5, h*3))
     py.display.flip()
-    return
-
-# Swap elements at index i and j
-def swap(arr, i, j):
-    global array_access
-    array_access += 4
-    aux = arr[i]
-    arr[i] = arr[j]
-    arr[j] = aux
-
-
-#          ╭──────────────────────────────────────────────────────────╮
-#          │                        QUICK SORT                        │
-#          ╰──────────────────────────────────────────────────────────╯
-
-def partition(arr, lft, rgt, scr):
-
-    # NOTE (exemple): my method as an exemple
-    # quicksort.coucou()
-
-    global comparisons, array_access
-    piv = lft
-
-    drawrect(piv, arr, scr, "green")
-
-    for i in range(lft+1, rgt):
-        if arr[i] < arr[lft]:
-            drawrect(i, arr, scr, "blue")
-            piv += 1
-            swap(arr, i, piv)
-        else:
-            drawrect(i, arr, scr, "red")
-        
-        array_access += 2
-        comparisons += 1
-        py.time.delay(1)
-
-    swap(arr, lft, piv)
-    return piv
-
-def qsort(arr, lft, rgt, scr):
-    if (lft < rgt):
-        piv = partition(arr, lft, rgt, scr)
-
-        drawarr(arr, scr)
-        py.time.delay(10)
-
-        qsort(arr, lft, piv, scr)
-        qsort(arr, piv+1, rgt, scr)
-    return
-
-def quickSort(array, scr):
-    qsort(array, 0, len(array), scr)
-    return
-
-
-#          ╭──────────────────────────────────────────────────────────╮
-#          │                       BUBBLE SORT                        │
-#          ╰──────────────────────────────────────────────────────────╯
-
-def bubbleSort(array, scr):
-    global comparisons, array_access
-
-    n = len(array)
-    for i in range(1,n):
-        for j in range(n-i):
-
-            if array[j] > array[j+1]:
-                swap(array, j, j+1)
-
-            comparisons += 1
-            array_access += 2
-
-        drawarr(array, scr)
-        drawrect(n-i, array, scr, "blue")
-        py.time.delay(20)
-
     return
