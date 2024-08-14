@@ -10,7 +10,7 @@ sort_alg = ""
 def greenPass(arr, scr):
     l = len(arr)
     for i in range(l):
-        drawrect(i, arr, scr, "green")
+        rectangle(i, arr, scr, "green")
     return
 
 def visualize(sort, arr, scr):
@@ -32,11 +32,11 @@ def visualize(sort, arr, scr):
     return
 
 def printStats(scr):
-    stats = my_font.render("{} Sort, Comparisons: {}, Array Accesses: {}".format(sort_alg, comparisons, array_access), False, "white")
+    stats = my_font.render("{} Sort, Comparisons: {}, Array Accesses: {}  |  KEYS: Quicksort=1, Binary Search=2, Shuffle Bars=r".format(sort_alg, comparisons, array_access), False, "white")
     scr.blit(stats, (5,5))
 
 # Draw the rectangle that corresponds to array[r] with any color.
-def drawrect(r, array, screen, color):
+def rectangle(r, array, screen, color):
     h = array[r]
     py.draw.rect(screen, color, py.Rect(15+r*5, 780-h*3, 5, h*3))
     py.display.flip()
@@ -48,6 +48,6 @@ def drawarr(array, screen):
     printStats(screen)
     for i in range(l):
         h = array[i]
-        py.draw.rect(screen, (50+h*0.35, 255-h*0.8, 100+h*0.3), py.Rect(15+i*5, 780-h*3, 5, h*3))
+        py.draw.rect(screen, (50+h*0.35, 80-(h)*0.1, 100+h*0.3), py.Rect(15+i*5, 780-h*3, 5, h*3))
     py.display.flip()
     return

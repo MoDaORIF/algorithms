@@ -1,5 +1,5 @@
 import pygame
-from visualizer import visual as draw_algorithm
+from visualizer import painter as paint
 
 # TODO: faire des aides pour les personnes en difficulté
 
@@ -45,7 +45,7 @@ def partition(bars: list[int], left: int, right: int, window: Surface) -> int:
     is placed in its correct position, and its index is returned.
 
     This function also includes visualization code to display the algorithm's progress
-    in a graphical window, using the `draw_algorithm.drawrect` function to color the
+    in a graphical window, using the `paint.rectangle` function to color the
     bars and `pygame.time.delay` to control the speed of the visualization.
 
     Args:
@@ -61,19 +61,21 @@ def partition(bars: list[int], left: int, right: int, window: Surface) -> int:
     global comparisons, array_access
     pivot = left
 
-    draw_algorithm.drawrect(pivot, bars, window, "red")
+    paint.rectangle(pivot, bars, window, "red")
 
     for i in range(left + 1, right):
         if bars[i] < bars[left]:
             # Animation
-            draw_algorithm.drawrect(i, bars, window, "blue")
+            # paint in blue if the bar is smaller in height than the pivot
+            paint.rectangle(i, bars, window, "blue")
 
             pivot += 1
             swap(bars, i, pivot)
 
         else:
             # Animation
-            draw_algorithm.drawrect(i, bars, window, "yellow")
+            # paint in green if the bar is greater in height than the pivot
+            paint.rectangle(i, bars, window, "green")
 
         # INFO: Delay to slow down the animation. Increase the value if you need
         # more time to visualize the animation.
@@ -85,7 +87,7 @@ def partition(bars: list[int], left: int, right: int, window: Surface) -> int:
         # This is not important for the exercice
         array_access += 2
         comparisons += 1
-        pygame.time.delay(1)
+        pygame.time.delay(0)
 
     swap(bars, left, pivot)
     return pivot
@@ -106,7 +108,7 @@ def quickSort(bars: list[int], left: int, right: int, window: Surface) -> None:
         pivot = partition(bars, left, right, window)
 
         # Animation
-        draw_algorithm.drawarr(bars, window)
+        paint.drawarr(bars, window)
 
         quickSort(bars, left, pivot, window)
         quickSort(bars, pivot + 1, right, window)

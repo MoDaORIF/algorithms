@@ -1,5 +1,5 @@
 import pygame
-from visualizer import visual as draw_algorithm
+from visualizer import painter as paint
 
 # TODO: faire des aides pour les personnes en difficulté
 
@@ -15,7 +15,7 @@ array_access = 0
 def binarySearch(bars: list[int], left: int, right: int, window: Surface) -> None:
 
     # `x` is the value we want to find
-    x = 9
+    x = 100
     max = right
 
     while left <= right:
@@ -24,30 +24,30 @@ def binarySearch(bars: list[int], left: int, right: int, window: Surface) -> Non
 
         # Check if x is present at mid
         if bars[mid] == x:
-            draw_algorithm.drawrect(x, bars, window, "red")
+            paint.rectangle(x, bars, window, "red")
             return
 
         # If x is greater, ignore left half
         elif bars[mid] < x:
-            draw_algorithm.drawrect(mid, bars, window, "yellow")
+            paint.rectangle(mid, bars, window, "blue")
             i = mid-1
 
             while i >= left:
-                draw_algorithm.drawrect(i, bars, window, "black")
+                paint.rectangle(i, bars, window, "black")
                 i -=1
 
             left = mid + 1
 
         # If x is smaller, ignore right half
         else:
-            draw_algorithm.drawrect(mid, bars, window, "blue")
+            paint.rectangle(mid, bars, window, "green")
             i = mid+1
 
             if right == max:
                 right -= 1
 
             while (i < right+1):
-                draw_algorithm.drawrect(i, bars, window, "black")
+                paint.rectangle(i, bars, window, "black")
                 i +=1
             right = mid - 1
 

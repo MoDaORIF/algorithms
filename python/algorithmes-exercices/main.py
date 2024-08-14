@@ -1,6 +1,6 @@
 import pygame as py
 from random import randint
-from visualizer import visual
+from visualizer import painter
 
 width, height = 1280, 800
 
@@ -12,8 +12,6 @@ arr = [i+1 for i in range(250)]
 
 def resetArray():
     global arr
-    # NOTE: DEBUG !
-    # Force the bars to be in the right order
     for _ in range(500):
         a, b = randint(0, 249), randint(0, 249)
         aux = arr[a]
@@ -23,8 +21,10 @@ def resetArray():
 
 # initial sort [SELECTION, INSERTION, QUICK, MERGE]
 sort = -1
-resetArray()
-visual.drawarr(arr, screen)
+    # NOTE: DEBUG !
+    # Force the bars to be in the right order
+# resetArray()
+painter.drawarr(arr, screen)
 
 # handle key inputs
 def keyActions():
@@ -36,7 +36,7 @@ def keyActions():
         return 1
     elif keys[py.K_r]:
         resetArray()
-        visual.drawarr(arr, screen)
+        painter.drawarr(arr, screen)
 
     return -1
 
@@ -57,8 +57,8 @@ while running:
                 continue
 
     if sort != -1:
-        visual.visualize(sort, arr, screen)
-        visual.drawarr(arr, screen)
+        painter.visualize(sort, arr, screen)
+        painter.drawarr(arr, screen)
         sort = -1
 
     clock.tick(framerate)
