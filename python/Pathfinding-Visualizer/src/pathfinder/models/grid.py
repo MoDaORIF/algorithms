@@ -25,7 +25,7 @@ class Grid:
         Returns:
             int: Weight
         """
-        return self.grid[pos[1]][pos[1]]
+        return self.grid[pos[0]][pos[1]]
 
     def get_cost(self, pos: tuple[int, int]) -> int:
         """Get weight of a node
